@@ -1,6 +1,20 @@
+import axios from 'axios'
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router'
 
 const NavBar = () => {
+  const user = useSelector((store) => store.user)
+  const handleLogout= async()=>{
+    try{
+      const res = await axios.post('http://localhost:7777/logout',{}, {withCredentials: true});
+    
+
+    }catch(err){
+      console.log(err);
+    }
+  }
+  console.log(user)
   return (
     <div>
       <div className="navbar bg-orange-500 shadow-sm">
@@ -11,7 +25,7 @@ const NavBar = () => {
       </div>
       <ul
         tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-orange-500 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu menu-sm dropdown-content bg-orange-500 mt-5 rounded-box z-1  w-52 p-2 shadow">
         <li><a>Item 1</a></li>
         <li>
           <a>Parent</a>
@@ -40,9 +54,32 @@ const NavBar = () => {
       <li><a>Item 3</a></li>
     </ul>
   </div>
-  <div className="navbar-end mr-5">
-    <a className="btn bg-orange-600 hover:bg-orange-400 border-none">Login</a>
-  </div>
+  {!user ? (
+    <div className="navbar-end mr-5">
+      <a className="btn bg-orange-600 hover:bg-orange-400 border-none">Login</a>
+    </div>
+  ) : 
+    <div className="dropdown dropdown-end navbar-end mr-5">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+        <div className="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS Navbar component"
+            src={user.profileUrl} />
+        </div>
+      </div>
+      <ul
+        tabIndex="-1"
+        className="menu menu-sm dropdown-content bg-orange-500 rounded-box z-1 mt-44 w-52 p-2 shadow">
+        <li>
+          <Link to='/profile' className="justify-between">
+            Profile
+            <span className="badge">New</span>
+          </Link>
+        </li>
+        <li><a>Settings</a></li>
+        <li><Link to='/login' onClick={handleLogout}>Logout</Link></li>
+      </ul>
+    </div>}
 </div>
     </div>
   )

@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../utils/userSlice';
+import  { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData]= useState({email:"riya@gmail.com", password: "riya054@Hey"})
+  const dispatch = useDispatch();
+  const navigate= useNavigate();
   // const [email, setEmail] = useState('riya@gmail.com')
   // const [password, setPassword] = useState('riya054@Hey');
 
@@ -17,6 +22,8 @@ const handleChange = (e)=>{
       console.log(loginData)
       const res = await axios.post('http://localhost:7777/login', loginData,{withCredentials: true});
       console.log(res)
+      dispatch(setUser(res?.data?.user))
+      navigate('/')
 
     }catch(err){
 
@@ -26,7 +33,7 @@ const handleChange = (e)=>{
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="card bg-orange-500 text-white-content w-5/12 p-6">
-      <h1 className='text-center text-4xl font-bold'>Login {loginData.email}</h1>
+      <h1 className='text-center text-4xl font-bold'>Login </h1>
   <div className="card-body items-center text-center">
 
     <label className="input validator">
