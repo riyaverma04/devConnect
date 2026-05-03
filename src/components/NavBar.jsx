@@ -2,9 +2,13 @@ import axios from 'axios'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
+import { useLocation } from "react-router-dom";
+
 
 const NavBar = () => {
-  const user = useSelector((store) => store.user)
+  const user = useSelector((store) => store.user);
+  const location = useLocation();
+ 
   const handleLogout= async()=>{
     try{
       const res = await axios.post('http://localhost:7777/logout',{}, {withCredentials: true});
@@ -15,48 +19,53 @@ const NavBar = () => {
     }
   }
   console.log(user)
-  return (
-    <div>
-      <div className="navbar bg-orange-500 shadow-sm">
-  <div className="navbar-start">
+  const hideNavbarRoutes = ["/profile/update"];
+
+if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
+  return null;
+}
+  return ( 
+   <div >
+      <div className="navbar bg-orange-500 shadow-sm  md:h-[2vh]">
+  <div className="navbar-start  ">
     <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
       </div>
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-orange-500 mt-5 rounded-box z-1  w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
+        <li><Link to={'/'}>Feed</Link></li>
         <li>
-          <a>Parent</a>
-          <ul className="p-2">
+          <a>messages</a>
+          {/* <ul className="p-2">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
-          </ul>
+          </ul> */}
         </li>
-        <li><a>Item 3</a></li>
+        {/* <li><a>Item 3</a></li> */}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">&lt;DevConnect/&gt;</a>
+    <a className="btn btn-ghost text-md md:text-xl">&lt;DevConnect/&gt;</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li>
+      <li><Link to={'/'}>Feed</Link></li>
+      {/* <li>
         <details>
-          <summary>Parent</summary>
+     
           <ul className="p-2 bg-orange-500 w-40 z-1">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
           </ul>
         </details>
-      </li>
-      <li><a>Item 3</a></li>
+      </li> */}
+      <li><a>messages</a></li>
     </ul>
   </div>
   {!user ? (
     <div className="navbar-end mr-5">
-      <a className="btn bg-orange-600 hover:bg-orange-400 border-none">Login</a>
+      <Link to="/signup" className="btn bg-orange-600 hover:bg-orange-400 border-none">SignUp</Link>
     </div>
   ) : 
     <div className="dropdown dropdown-end navbar-end mr-5">

@@ -10,10 +10,11 @@ const Body = () => {
   const dispatch = useDispatch();
   const userFromStore = useSelector((state) => state.user);
   const getProfile = async()=>{
-    if(userFromStore)return;
+  if (userFromStore && userFromStore._id) return;
       try{
         const res = await axios.get('http://localhost:7777/profile',{withCredentials: true});
-        dispatch(setUser(res.data.user));
+        dispatch(setUser(res?.data?.userData));
+        console.log(res?.data?.userData)
 
 
 
@@ -25,7 +26,7 @@ const Body = () => {
 
   useEffect(()=>{
     getProfile();
-  },[])
+  },[userFromStore])
   return (
     <>
     <NavBar/>
