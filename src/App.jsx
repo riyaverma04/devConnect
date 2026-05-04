@@ -13,6 +13,8 @@ import OtherProfile from './components/OtherProfile'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { setUser } from './utils/userSlice'
+import Connections from './components/Connections'
+import RequestRecieved from './components/RequestRecieved'
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +45,9 @@ function App() {
         
         </Route>
         <Route path='profile/:useId/view' element={<OtherProfile />} />
+        <Route path='/connections' element={<Connections />} />
+        <Route path='/requests' element={<RequestRecieved />} />
+
         
 
       </Routes>
