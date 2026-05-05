@@ -1,14 +1,78 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router';
 import Loading from './loading';
 import axios from 'axios';
 import { addConnections } from '../utils/connectionSlice';
+import { setUser } from '../utils/userSlice';
+import { addOtherUser } from '../utils/otherUserSlice';
 
-const Profile = () => {
+const Profile = ({otherUserId}) => {
   const userProfile = useSelector((state) =>state?.user);
+  console.log(userProfile);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  
+  
+  
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+
+
+
+
+
+
+
+      //if(!userProfile){
+        try {
+
+
+          if(otherUserId){
+            const res = await axios.get(`http://localhost:7777/profile/${otherUserId}/view`,{withCredentials: true});
+            console.log(res.data?.userProfile);
+            dispatch(addOtherUser(res.data?.userProfile));
+          }else{
+            const res = await axios.get("http://localhost:7777/profile", {
+        withCredentials: true,})
+      
+      console.log("app",res.data?.userData)
+      dispatch(setUser(res.data?.userData));
+
+          }
+      
+         
+    
+      
+    
+    
+    
+     
+    } catch (err) {
+      console.log(err);
+    }
+      //}
+
+  };
+
+  
+  
+
+    
+  
+
+    fetchUser();
+  
+
+}, [otherUserId]);
+
+ 
+
+
+
+
   console.log(userProfile)
   console.log(userProfile?.profileUrl?.url)
   const handleEditProfile =()=>{

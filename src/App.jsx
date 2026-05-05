@@ -17,23 +17,7 @@ import Connections from './components/Connections'
 import RequestRecieved from './components/RequestRecieved'
 
 function App() {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get("http://localhost:7777/profile", {
-        withCredentials: true,
-      });
-      console.log("app",res.data?.userData)
-      dispatch(setUser(res.data?.userData));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  fetchUser();
-}, []);
   return(
     <BrowserRouter   basename='/'>
       <Routes>
@@ -44,7 +28,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         
         </Route>
-        <Route path='profile/:useId/view' element={<OtherProfile />} />
+        <Route path='/profile/:userId/view' element={<OtherProfile />} />
         <Route path='/connections' element={<Connections />} />
         <Route path='/requests' element={<RequestRecieved />} />
 
