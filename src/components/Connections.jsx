@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addConnections } from '../utils/connectionSlice';
 import axios from 'axios';
 import ConnectionsList from './ConnectionsList';
+import { useNavigate } from 'react-router';
 
 
 const Connections = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     console.log("before store")
     const connections = useSelector((store)=>store?.connections );
     console.log(connections)
@@ -30,6 +32,12 @@ const Connections = () => {
         fetchConnections();
   }
     },[connections]);
+     const handleConnectionProfile=(id)=>{
+      console.log("hey")
+      console.log(id)
+      navigate(`/profile/${id}/view`)
+    }
+   
 
 
 
@@ -42,7 +50,7 @@ const Connections = () => {
                 connections?.map((connection)=>{
                     return(
                         <div key={connection._id}>
-                            <ConnectionsList  connection={connection}/>
+                            <ConnectionsList  connection={connection}  handleConnectionProfile={handleConnectionProfile}/>
                         </div>
                     )
                 })
