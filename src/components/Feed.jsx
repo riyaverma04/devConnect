@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import UserCard from './UserCard'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setFeed } from '../utils/feedSlice'
 
 const Feed = () => {
     const dispatch = useDispatch();
-    const [feedUser, setFeedUser] = useState([]);
+    // const [feedUser, setFeedUser] = useState([]);
+    const feedUser = useSelector((store)=>store?.feed || [] );
     const getFeedUser = async()=>{
         try{
             const res = await axios.get('http://localhost:7777/feed',{withCredentials: true});
             console.log(res?.data?.feedUser);
             dispatch(setFeed(res?.data?.feedUser))
-            setFeedUser(res?.data?.feedUser);
+            // setFeedUser(res?.data?.feedUser);
 
         }catch(err){
             console.log(err)
@@ -43,7 +44,7 @@ const Feed = () => {
 
   return (
     <div>
-        {feedUser !== 0 ?<div className='w-full h-screen flex justify-center items-center'>
+        {feedUser === 0 ?<div className='w-full h-screen flex justify-center items-center'>
             <div className='5/12 h-auto p-5'><h1 className='text-xl'>You have already reached at max of your feed.</h1></div>
             
             </div> :  <UserCard user={feedUser[0]} handleInterestedRequest={handleInterestClick} />}

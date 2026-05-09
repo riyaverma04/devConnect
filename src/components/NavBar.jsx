@@ -36,6 +36,7 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-orange-500 mt-5 rounded-box z-1  w-52 p-2 shadow">
         <li><Link to={'/'}>Feed</Link></li>
+        <li><Link to={'/requests'}>Requests</Link></li>
         <li>
           <a>messages</a>
           {/* <ul className="p-2">
@@ -51,6 +52,7 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       <li><Link to={'/'}>Feed</Link></li>
+      <li><Link to={'/requests'}>Requests</Link></li>
       {/* <li>
         <details>
      

@@ -6,9 +6,16 @@ const connectionSlice= createSlice({
     reducers:{
         addConnections:(state,action)=>{
             return action.payload
+        },
+        removeConnection:(state, action)=>{
+            
+            return state.filter(connection => {
+                connection._id !== action.payload;
+                
+            });
         }
     }
 })
 
-export const {addConnections} = connectionSlice.actions;
+export const {addConnections,removeConnection} = connectionSlice.actions;
 export default connectionSlice.reducer;

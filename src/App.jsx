@@ -15,6 +15,7 @@ import axios from 'axios'
 import { setUser } from './utils/userSlice'
 import Connections from './components/Connections'
 import RequestRecieved from './components/RequestRecieved'
+import Request from './components/Request'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Body />} >
         <Route index element={<Feed />} />
+        <Route path='/requests' element={<Request/>} />
         <Route path='/profile/update' element={<ProfileEdit />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
