@@ -3,7 +3,7 @@ import UserCard from './UserCard'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setFeed } from '../utils/feedSlice'
+import { removeUserFromFeed, setFeed } from '../utils/feedSlice'
 
 const Feed = () => {
     const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const Feed = () => {
         try{
             const res = await axios.post(`http://localhost:7777/send/${status}/${id}`,{}, {withCredentials:true});
             console.log(res)
+            dispatch(removeUserFromFeed(id));
 
         }catch(err){
             console.log(err)

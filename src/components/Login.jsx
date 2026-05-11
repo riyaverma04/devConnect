@@ -5,7 +5,9 @@ import { setUser } from '../utils/userSlice';
 import  { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [loginData, setLoginData]= useState({email:"riya@gmail.com", password: "riya054@Hey"})
+  const [loginData, setLoginData]= useState({ firstName: "",
+    lastName: "",email:"riya@gmail.com", password: "riya054@Hey"});
+  const [isLogIn , setIsLogIn] = useState(true);
   const dispatch = useDispatch();
   const navigate= useNavigate();
   // const [email, setEmail] = useState('riya@gmail.com')
@@ -17,10 +19,13 @@ const handleChange = (e)=>{
   
 }
 
-  const handleLogin = async()=>{
+  const handleSubmit = async()=>{
     try{
       console.log(loginData)
-      const res = await axios.post('http://localhost:7777/login', loginData,{withCredentials: true});
+        const endpoint = isLogIn
+        ? "http://localhost:7777/login"
+        : "http://localhost:7777/signup";
+      const res = await axios.post(endpoint, loginData,{withCredentials: true});
       console.log(res)
       dispatch(setUser(res?.data?.user))
       navigate('/')
@@ -33,8 +38,45 @@ const handleChange = (e)=>{
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="card bg-orange-500 text-white-content w-5/12 p-6">
-      <h1 className='text-center text-4xl font-bold'>Login </h1>
+      <h1 className='text-center text-4xl font-bold'>{ !isLogIn ? "SignUp" :"Login" }</h1>
   <div className="card-body items-center text-center">
+    {
+
+      !isLogIn &&
+      <>
+    
+      <label className="input validator">
+  <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+    </g>
+  </svg>
+  <input type="text" placeholder="firstName" required name='firstName' value={loginData.firstName} onChange={(e) => handleChange(e)}  />
+</label>
+    <label className="input validator">
+  <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+    </g>
+  </svg>
+  <input type="text" placeholder="lastName" required name='lastName' value={loginData.lastName} onChange={(e) => handleChange(e)}  />
+</label>
+</>
+}
 
     <label className="input validator">
   <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -84,7 +126,17 @@ const handleChange = (e)=>{
   <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
 </p>
 
-<button className="btn btn-outline btn-warning" onClick={handleLogin}>Login</button>
+<button className="btn btn-outline btn-warning" onClick={handleSubmit}> {isLogIn ? "Login" : "SignUp"}</button>
+ <p
+            className="cursor-pointer mt-3"
+            onClick={() => setIsLogIn(!isLogIn)}
+          >
+            {
+              isLogIn
+                ? "New User? SignUp Here"
+                : "Already have an account? Login"
+            }
+          </p>
     
 </div>
     </div>

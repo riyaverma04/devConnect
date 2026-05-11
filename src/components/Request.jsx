@@ -20,8 +20,8 @@ const Request = () => {
         
                 //calling api to store information about whether i am interested or not
                 try{
-                    const res = await axios.post(`http://localhost:7777/requests/${status}/${id}`,{}, {withCredentials:true});
-                    console.log(res)
+                     await axios.post(`http://localhost:7777/requests/${status}/${id}`,{}, {withCredentials:true});
+                    
                     dispatch(removeRequest(id));
         
                 }catch(err){
