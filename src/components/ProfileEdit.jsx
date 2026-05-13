@@ -101,7 +101,7 @@ if (file) {
 
     console.log("UPDATED USER:", res.data);
 
-    dispatch(setUser(res.data.updatedUser));
+    dispatch(setUser(res.data.user));
 
    setTimeout(() => {
   navigate("/profile");

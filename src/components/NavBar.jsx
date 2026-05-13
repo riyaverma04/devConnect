@@ -1,13 +1,38 @@
 import axios from 'axios'
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router'
 import { useLocation } from "react-router-dom";
+import { setUser } from '../utils/userSlice';
 
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
   const location = useLocation();
+
+
+
+   const navigate = useNavigate();
+  const dispatch = useDispatch();
+ 
+  const getProfile = async()=>{
+  if (user && user._id) return;
+      try{
+        const res = await axios.get('http://localhost:7777/profile',{withCredentials: true});
+        dispatch(setUser(res?.data?.userData));
+        console.log(res?.data?.userData)
+
+
+
+    }catch(err){
+      navigate('/login');
+      console.log(err)
+    }
+  }
+
+  useEffect(()=>{
+    getProfile();
+  },[])
  
   const handleLogout= async()=>{
     try{
@@ -19,6 +44,7 @@ const NavBar = () => {
     }
   }
   console.log(user)
+
   const hideNavbarRoutes = ["/profile/update"];
 
 if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
@@ -75,7 +101,7 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src={user.profileUrl} />
+            src={user.profileUrl.url} />
         </div>
       </div>
       <ul

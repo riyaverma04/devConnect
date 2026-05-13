@@ -45,7 +45,7 @@ const Feed = () => {
 
   return (
     <div>
-        {feedUser === 0 ?<div className='w-full h-screen flex justify-center items-center'>
+        {feedUser.length === 0 ?<div className='w-full h-screen flex justify-center items-center'>
             <div className='5/12 h-auto p-5'><h1 className='text-xl'>You have already reached at max of your feed.</h1></div>
             
             </div> :  <UserCard user={feedUser[0]} handleInterestedRequest={handleInterestClick} />}
