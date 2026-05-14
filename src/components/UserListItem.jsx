@@ -3,7 +3,7 @@ import React from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router';
 
 
-const UserListItem = ({user,handleUserProfile,handleRemoveUser,handleRequest}) => {
+const UserListItem = ({user,handleUserProfile,handleRemoveUser,handleRequest,handleMessageButton}) => {
   console.log(user)
     const {firstName, lastName, profileUrl, about,_id} = user;
     const navigate= useNavigate();
@@ -43,7 +43,7 @@ const UserListItem = ({user,handleUserProfile,handleRemoveUser,handleRequest}) =
     </>
 :
     
-    <><button className="btn btn-square btn-ghost text-sm">
+    <><button className="btn btn-square btn-ghost text-sm" onClick={()=>handleMessageButton(_id)}>
       <MessagesSquare className="w-4 h-4" />
     </button>
     <button className="btn btn-square btn-ghost text-sm" onClick={()=>handleRemoveUser(_id)}>

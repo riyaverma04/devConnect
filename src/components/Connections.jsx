@@ -19,6 +19,15 @@ const Connections = () => {
 
 
 
+
+    const handleMessage=(userId)=>{
+        console.log(userId, "for message this is user id");
+        navigate(`/chat/${userId}`);
+
+    }
+
+
+
     const fetchConnections= async()=>{
         try{
              const res = await axios.get("http://localhost:7777/user/connections",{withCredentials:true});
@@ -94,7 +103,7 @@ if (connections.length === 0) {
                 connections?.map((user)=>{
                     return(
                         <div key={user._id}>
-                            <UserListItem  user={user}  handleUserProfile={handleConnectionProfile} handleRemoveUser={handleRemoveConnectionFromList}/>
+                            <UserListItem  user={user}  handleUserProfile={handleConnectionProfile} handleRemoveUser={handleRemoveConnectionFromList} handleMessageButton={handleMessage}/>
                         </div>
                     )
                 })

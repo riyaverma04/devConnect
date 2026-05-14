@@ -16,6 +16,7 @@ import { setUser } from './utils/userSlice'
 import Connections from './components/Connections'
 import RequestRecieved from './components/RequestRecieved'
 import Request from './components/Request'
+import Chat from './components/Chat'
 
 function App() {
   
@@ -28,7 +29,9 @@ function App() {
         <Route path='/requests' element={<Request/>} />
         <Route path='/profile/update' element={<ProfileEdit />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/chat/:userId' element={<Chat />} />
         
         </Route>
         <Route path='/profile/:userId/view' element={<OtherProfile />} />

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../utils/userSlice';
-import  { useNavigate } from 'react-router-dom';
+import  { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData]= useState({ firstName: "",
@@ -16,6 +16,7 @@ const Login = () => {
 const handleChange = (e)=>{
 
   setLoginData((prev)=>({...prev, [e.target.name]: e.target.value}));
+  const location= useLocation();
   
 }
 
@@ -28,7 +29,13 @@ const handleChange = (e)=>{
       const res = await axios.post(endpoint, loginData,{withCredentials: true});
       console.log(res)
       dispatch(setUser(res?.data?.user))
-      navigate('/')
+      console.log(location.pathname)
+      if(location.pathname ==="/signup"){
+        navigate('/profile/update');
+      }else{
+
+        navigate('/')
+      }
 
     }catch(err){
 
@@ -127,16 +134,22 @@ const handleChange = (e)=>{
 </p>
 
 <button className="btn btn-outline btn-warning" onClick={handleSubmit}> {isLogIn ? "Login" : "SignUp"}</button>
- <p
-            className="cursor-pointer mt-3"
-            onClick={() => setIsLogIn(!isLogIn)}
-          >
+
+            
+          
             {
               isLogIn
-                ? "New User? SignUp Here"
-                : "Already have an account? Login"
+                ? <p className="cursor-pointer mt-3"
+            onClick={() => {
+              setIsLogIn(false)
+              navigate('/signup')
             }
-          </p>
+              
+            }>New User? SignUp Here</p>
+                : <p className="cursor-pointer mt-3"
+            onClick={() => setIsLogIn(true)}>Already have an account? Login</p>
+            }
+          
     
 </div>
     </div>

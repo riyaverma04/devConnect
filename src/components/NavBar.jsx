@@ -16,7 +16,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
  
   const getProfile = async()=>{
-  if (user && user._id) return;
+ 
       try{
         const res = await axios.get('http://localhost:7777/profile',{withCredentials: true});
         dispatch(setUser(res?.data?.userData));

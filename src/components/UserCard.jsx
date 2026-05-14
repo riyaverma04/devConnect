@@ -21,12 +21,12 @@ const UserCard = ({user,handleInterestedRequest}) => {
     <h2 className="card-title">
       {firstName} {lastName}
 
-      <div className="badge badge-secondary" onClick={()=>{navigate(`/profile/${_id}/view`)}}>VIEW</div>
+      <div className="badge badge-secondary cursor-pointer" onClick={()=>{navigate(`/profile/${_id}/view`)}}>VIEW</div>
     </h2>
     <p>{about}</p>
     <div className="card-actions justify-end items-baseline mt-6">
-      <div className="badge  bg-red-500 py-4 px-5" onClick={()=>handleInterestedRequest(_id,"ignored")}>ignore</div>
-      <div className="badge badge-secondary py-4 px-5" onClick={()=>handleInterestedRequest(_id,"interested")}>interesed</div>
+      <div className="badge  bg-red-500 py-4 px-5 cursor-pointer" onClick={()=>handleInterestedRequest(_id,"ignored")}>ignore</div>
+      <div className="badge badge-secondary cursor-pointer py-4 px-5" onClick={()=>handleInterestedRequest(_id,"interested")}>interesed</div>
     </div>
   </div>
 </div>
