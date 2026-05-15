@@ -4,6 +4,7 @@ import feedReducer from "./feedSlice";
 import connectionReducer from './connectionSlice'
 import otherUserReducer from './otherUserSlice'
 import requestReducer from './requestSlice'
+import messageFromRoomReducer from './messageFromRoomSlice'
 
 const appStore = configureStore({
     reducer:{
@@ -12,6 +13,7 @@ const appStore = configureStore({
         connections: connectionReducer,
         otherUser:otherUserReducer,
         requests: requestReducer,
+        messageFromRoom: messageFromRoomReducer
 
     }
 
