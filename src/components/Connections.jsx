@@ -6,6 +6,7 @@ import UserListItem from './UserListItem';
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
 import { addOtherUser } from '../utils/otherUserSlice';
+import Loading from './loading';
 
 
 
@@ -70,7 +71,7 @@ const Connections = () => {
     }
 
     if (loading) {
-  return <h1>Loading...</h1>;
+  return <Loading/>;
 }
 
 if (connections.length === 0) {

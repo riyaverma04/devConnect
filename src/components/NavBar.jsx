@@ -64,7 +64,7 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
         <li><Link to={'/'}>Feed</Link></li>
         <li><Link to={'/requests'}>Requests</Link></li>
         <li>
-          <a>messages</a>
+          <Link to={'/chat'}>messages</Link>
           {/* <ul className="p-2">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
@@ -88,7 +88,7 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
           </ul>
         </details>
       </li> */}
-      <li><a>messages</a></li>
+      <li><Link to={'/chat'}>messages</Link></li>
     </ul>
   </div>
   {!user ? (

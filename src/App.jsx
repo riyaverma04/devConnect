@@ -17,6 +17,7 @@ import Connections from './components/Connections'
 import RequestRecieved from './components/RequestRecieved'
 import Request from './components/Request'
 import Chat from './components/Chat'
+import ChatList from './components/ChatList'
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/chat' element={<ChatList />} />
         <Route path='/chat/:userId' element={<Chat />} />
         
         </Route>

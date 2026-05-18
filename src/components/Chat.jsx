@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import socket from '../utils/socket'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { addMessagesFromRoom } from '../utils/messageFromRoomSlice';
+import { ArrowLeft } from 'lucide-react';
 
 
 const Chat = () => {
@@ -16,6 +17,7 @@ const Chat = () => {
     const [newMessage, setNewMessage] = useState('')
     const  messagesEndRef = useRef(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
    
     const {userId} = params
     console.log(userId)
@@ -104,6 +106,7 @@ const Chat = () => {
          const messageData =  {
     text: newMessage,
     roomId: roomId,
+    receiverId : userId,
     senderId: authenticUser?._id,
     timeStamp:  new Date().toLocaleTimeString()
     
@@ -117,6 +120,8 @@ const Chat = () => {
         
     }
   return (
+    <div className='p-5'>
+      <div onClick={()=>{navigate(-1)}} >  <ArrowLeft  /></div>
     <div className='m-10 flex justify-center items-center'>
         <div className='w-[80%] h-[80vh] bg-gray-700 flex flex-col gap-3'>
             <div className='h-[70vh] p-5  overflow-y-auto align-baseline'>
@@ -193,6 +198,7 @@ const isMyMessage =senderId === authenticUser?._id;
         </div>
 
       
+    </div>
     </div>
   )
 }

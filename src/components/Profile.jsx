@@ -110,7 +110,7 @@ const Profile = ({otherUserId}) => {
       </div>
       {/* //profile photo is round in shape and is overlapping the cover photo and it is at the left side of the cover photo left bottom side  */}
       <div className="profilePhoto w-[100px] h-[100px] absolute rounded-full overflow-hidden border-4 border-white -translate-y-1/2 left-5">
-        <img src={user?.profileUrl?.url} alt="Profile" srcset="" className='object-cover' />
+        <img src={user?.profileUrl?.url} alt="Profile" srcset="" className='object-cover w-full' />
       </div>
       <div className="userInfo mt-12 px-5 flex flex-col gap-3">
         <div className='flex items-center gap-2'> 
