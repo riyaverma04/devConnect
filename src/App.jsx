@@ -18,6 +18,7 @@ import RequestRecieved from './components/RequestRecieved'
 import Request from './components/Request'
 import Chat from './components/Chat'
 import ChatList from './components/ChatList'
+import UploadPost from './components/pages/UploadPost'
 
 function App() {
   
@@ -39,6 +40,7 @@ function App() {
         <Route path='/profile/:userId/view' element={<OtherProfile />} />
         <Route path='/connections' element={<Connections />} />
         <Route path='/requests' element={<RequestRecieved />} />
+        <Route path='/upload' element={<UploadPost />} />
 
         
 

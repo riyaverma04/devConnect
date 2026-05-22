@@ -70,7 +70,9 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
             <li><a>Submenu 2</a></li>
           </ul> */}
         </li>
-        {/* <li><a>Item 3</a></li> */}
+        <li>
+          <Link to="/upload">Upload Post</Link>
+        </li>
       </ul>
     </div>
     <a className="btn btn-ghost text-md md:text-xl">&lt;DevConnect/&gt;</a>
@@ -89,6 +91,7 @@ if (hideNavbarRoutes.some(route => location.pathname.startsWith(route))) {
         </details>
       </li> */}
       <li><Link to={'/chat'}>messages</Link></li>
+      <li><Link to={'/upload'}>Upload Post</Link></li>
     </ul>
   </div>
   {!user ? (
