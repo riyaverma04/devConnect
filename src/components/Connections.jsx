@@ -97,7 +97,7 @@ if (connections.length === 0) {
                 <div onClick={()=>{navigate(-1)}} >  <ArrowLeft  /></div>
                 <div className='col-span-2'><h1 className='text-xl font-bold '>connections</h1></div>
             </div>
-              <div className="p-4 pb-2 text-xs opacity-60 tracking-wide"> 2 connections </div>
+              <div className="p-4 pb-2 text-xs opacity-60 tracking-wide"> {connections.length} connections </div>
         <div className='p-4'>
            
             {

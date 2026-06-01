@@ -1,65 +1,83 @@
-import React, { useEffect, useState } from 'react'
+// Feed.jsx
+
+import React, { useEffect } from 'react'
 import UserCard from './UserCard'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { removeUserFromFeed, setFeed } from '../utils/feedSlice'
 
 const Feed = () => {
+
     const dispatch = useDispatch();
-    // const [feedUser, setFeedUser] = useState([]);
-    const feedUser = useSelector((store)=>store?.feed  );
-    const getFeedUser = async()=>{
-        try{
-            const res = await axios.get('http://localhost:7777/feed',{withCredentials: true});
-            console.log(res?.data?.feedUser);
-            dispatch(setFeed(res?.data?.feedUser))
-            // setFeedUser(res?.data?.feedUser);
 
-        }catch(err){
-            console.log(err)
+    const feedUser = useSelector((store) => store?.feed);
+
+    const getFeedUser = async () => {
+        try {
+
+            const res = await axios.get(
+                'http://localhost:7777/feed',
+                { withCredentials: true }
+            );
+
+            dispatch(setFeed(res?.data?.feedUser));
+
+        } catch (err) {
+            console.log(err);
         }
-    }
-    useEffect(()=>{
+    };
+
+    useEffect(() => {
         getFeedUser();
-    },[])
-    // console.log(feedUser[0]);
-    const handleInterestClick=async(id,status)=>{
-        console.log("this is id of person whom i am interested: ",id);
-        console.log("this is status user passed: ", status);
-       
+    }, []);
 
+    const handleInterestClick = async (id, status) => {
 
-        //calling api to store information about whether i am interested or not
-        try{
-            const res = await axios.post(`http://localhost:7777/send/${status}/${id}`,{}, {withCredentials:true});
-            console.log(res)
-            // dispatch(removeUserFromFeed(id));
-            getFeedUser();
-         
+        try {
 
-        }catch(err){
-            console.log(err)
+            await axios.post(
+                `http://localhost:7777/send/${status}/${id}`,
+                {},
+                { withCredentials: true }
+            );
+
+            dispatch(removeUserFromFeed(id));
+
+        } catch (err) {
+            console.log(err);
         }
+    };
 
-
-
-    }
     const firstUser = feedUser?.[0];
 
-  return (
-    <div>
-        {firstUser ? <UserCard user={firstUser} handleInterestedRequest={handleInterestClick} />:
-        
-        
-        
-        <div className='w-full h-screen flex justify-center items-center'>
-            <div className='5/12 h-auto p-5'><h1 className='text-xl'>You have already reached at max of your feed.</h1></div>
-            
-            </div>  }
-       
-    </div>
-  )
+    return (
+
+        <div className='min-h-screen bg-base-200 flex justify-center items-center px-3 sm:px-5 py-6'>
+
+            {firstUser ? (
+
+                <UserCard
+                    user={firstUser}
+                    handleInterestedRequest={handleInterestClick}
+                />
+
+            ) : (
+
+                <div className='bg-base-100 w-full max-w-md rounded-3xl shadow-2xl p-8 text-center'>
+
+                    <h1 className='text-2xl sm:text-3xl font-bold'>
+                        No More Profiles
+                    </h1>
+
+                    <p className='text-gray-400 mt-3 text-sm sm:text-base'>
+                        You’ve reached the end of your feed.
+                    </p>
+
+                </div>
+            )}
+
+        </div>
+    )
 }
 
 export default Feed

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../utils/userSlice';
@@ -10,13 +10,14 @@ const Login = () => {
   const [isLogIn , setIsLogIn] = useState(true);
   const dispatch = useDispatch();
   const navigate= useNavigate();
+  const location= useLocation();
   // const [email, setEmail] = useState('riya@gmail.com')
   // const [password, setPassword] = useState('riya054@Hey');
 
 const handleChange = (e)=>{
 
   setLoginData((prev)=>({...prev, [e.target.name]: e.target.value}));
-  const location= useLocation();
+  
   
 }
 
@@ -42,9 +43,12 @@ const handleChange = (e)=>{
 
     }
   }
+
+
+ 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="card bg-orange-500 text-white-content w-5/12 p-6">
+      <div className="card bg-orange-500 text-white-content w-[90vw] sm:w-5/12 p-6">
       <h1 className='text-center text-4xl font-bold'>{ !isLogIn ? "SignUp" :"Login" }</h1>
   <div className="card-body items-center text-center">
     {
@@ -138,7 +142,7 @@ const handleChange = (e)=>{
             
           
             {
-              isLogIn
+              isLogIn 
                 ? <p className="cursor-pointer mt-3"
             onClick={() => {
               setIsLogIn(false)

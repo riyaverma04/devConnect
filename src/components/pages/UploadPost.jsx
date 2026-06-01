@@ -4,10 +4,12 @@ import { ArrowLeft, Folder } from 'lucide-react'
 import Button from 'daisyui/components/button'
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const UploadPost = () => {
     const [postContent, setPostContent ] = useState("");
     const [file, setFile] = useState(null);
+    const navigate = useNavigate();
     const handleUploadPost = async(e)=>{
         e.preventDefault();
         try{
@@ -21,6 +23,7 @@ const UploadPost = () => {
             console.log(uploadedData);
             setPostContent("");
             setFile(null);
+            navigate('/profile');
         }catch(err){
             console.log(err);
         }

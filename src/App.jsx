@@ -19,6 +19,7 @@ import Request from './components/Request'
 import Chat from './components/Chat'
 import ChatList from './components/ChatList'
 import UploadPost from './components/pages/UploadPost'
+import PostList from './components/pages/PostList'
 
 function App() {
   
@@ -35,12 +36,14 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/chat' element={<ChatList />} />
         <Route path='/chat/:userId' element={<Chat />} />
-        
-        </Route>
-        <Route path='/profile/:userId/view' element={<OtherProfile />} />
+         <Route path='/profile/:userId/view' element={<OtherProfile />} />
         <Route path='/connections' element={<Connections />} />
         <Route path='/requests' element={<RequestRecieved />} />
         <Route path='/upload' element={<UploadPost />} />
+        <Route path='/posts/:userId' element={<PostList />} />
+        
+        </Route>
+       
 
         
 

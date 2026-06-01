@@ -23,7 +23,7 @@ const UserListItem = ({user,handleUserProfile,handleRemoveUser,handleRequest,han
     <div onClick={()=>handleUserProfile(_id,user)}><img className="size-10 rounded-box" src={profileUrl.url}/></div>
     <div>
       <div>{firstName }{lastName}</div>
-      <div className="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
+      {/* <div className="text-xs uppercase font-semibold opacity-60">Remaining Reason</div> */}
     </div>
     <p className="list-col-wrap text-xs truncate s:w-20 m:w-40 ">
       "Remaining Reason" became an instant hit, praised for its haunting sound and emotional depth. A viral performance brought it widespread recognition, making it one of Dio Lupa’s most iconic tracks.
