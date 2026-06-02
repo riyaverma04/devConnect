@@ -94,7 +94,7 @@ if (file) {
 }
 
     const res = await axios.patch(
-      "http://localhost:7777/update",
+      import.meta.env.VITE_BASE_URL+"/update",
       data,
       { withCredentials: true }
     );

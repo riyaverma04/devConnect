@@ -8,7 +8,7 @@ const useFetchUser=(userId)=>{
     useEffect(()=>{
     const fetchUser = async()=>{
         try{
-        const res = await axios.get(`http://localhost:7777/profile/${userId}/view`,{withCredentials:true});
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/profile/${userId}/view`,{withCredentials:true});
         const profile = res.data?.userProfile;
         // console.log(res)
         setUser(profile);

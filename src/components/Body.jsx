@@ -12,7 +12,7 @@ const Body = () => {
   const getProfile = async()=>{
   if (userFromStore && userFromStore._id) return;
       try{
-        const res = await axios.get('http://localhost:7777/profile',{withCredentials: true});
+        const res = await axios.get(import.meta.env.VITE_BASE_URL +'/profile',{withCredentials: true});
         dispatch(setUser(res?.data?.userData));
         console.log(res?.data?.userData)
 

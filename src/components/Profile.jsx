@@ -120,7 +120,7 @@ const Profile = ({ otherUserId }) => {
         // OTHER USER PROFILE
         if (otherUserId) {
           const res = await axios.get(
-            `http://localhost:7777/profile/${otherUserId}/view`,
+            `${import.meta.env.VITE_BASE_URL}/profile/${otherUserId}/view`,
             {
               withCredentials: true,
             }
@@ -139,7 +139,7 @@ const Profile = ({ otherUserId }) => {
         // MY PROFILE
         else {
           const res = await axios.get(
-            "http://localhost:7777/profile",
+            import.meta.env.VITE_BASE_URL+"/profile",
             {
               withCredentials: true,
             }

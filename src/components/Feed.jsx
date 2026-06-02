@@ -16,7 +16,7 @@ const Feed = () => {
         try {
 
             const res = await axios.get(
-                'http://localhost:7777/feed',
+                import.meta.env.VITE_BASE_URL+'/feed',
                 { withCredentials: true }
             );
 
@@ -36,7 +36,7 @@ const Feed = () => {
         try {
 
             await axios.post(
-                `http://localhost:7777/send/${status}/${id}`,
+                `${import.meta.env.VITE_BASE_URL}/send/${status}/${id}`,
                 {},
                 { withCredentials: true }
             );

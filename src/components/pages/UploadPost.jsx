@@ -19,7 +19,7 @@ const UploadPost = () => {
                 data.append("photos", file);
             }
 
-            const uploadedData = await axios.post('http://localhost:7777/post', data, {withCredentials: true});
+            const uploadedData = await axios.post(import.meta.env.VITE_BASE_URL+'/post', data, {withCredentials: true});
             console.log(uploadedData);
             setPostContent("");
             setFile(null);

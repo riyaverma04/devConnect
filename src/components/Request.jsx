@@ -20,7 +20,7 @@ const Request = () => {
         
                 //calling api to store information about whether i am interested or not
                 try{
-                     await axios.post(`http://localhost:7777/requests/${status}/${id}`,{}, {withCredentials:true});
+                     await axios.post(`${import.meta.env.VITE_BASE_URL}/requests/${status}/${id}`,{}, {withCredentials:true});
                     
                     dispatch(removeRequest(id));
         
@@ -31,7 +31,7 @@ const Request = () => {
     }
     const fetchRequest = async()=>{
        try{
-         const res = await axios.get(`http://localhost:7777/requests/received`,{withCredentials:true});
+         const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/requests/received`,{withCredentials:true});
          console.log(res.data?.receivedRequests);
          dispatch(addRequest(res.data?.receivedRequests));
          

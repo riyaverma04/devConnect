@@ -31,7 +31,7 @@ const Connections = () => {
 
     const fetchConnections= async()=>{
         try{
-             const res = await axios.get("http://localhost:7777/user/connections",{withCredentials:true});
+             const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/connections`,{withCredentials:true});
                console.log(res.data?.connections);
                 //storeing connections in redux
                 dispatch(addConnections(res.data?.connections));
@@ -47,7 +47,7 @@ const Connections = () => {
     const handleRemoveConnectionFromList = async(id)=>{
         console.log(id)
         try{
-          await axios.delete(`http://localhost:7777/connection-remove/${id}`,{withCredentials: true});
+          await axios.delete(`${import.meta.env.VITE_BASE_URL}/connection-remove/${id}`,{withCredentials: true});
             dispatch(removeConnection(id));
 
 

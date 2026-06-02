@@ -18,7 +18,7 @@ const NavBar = () => {
   const getProfile = async()=>{
  
       try{
-        const res = await axios.get('http://localhost:7777/profile',{withCredentials: true});
+        const res = await axios.get(import.meta.env.VITE_BASE_URL+"/profile",{withCredentials: true});
         dispatch(setUser(res?.data?.userData));
         console.log(res?.data?.userData)
 
@@ -36,7 +36,7 @@ const NavBar = () => {
  
   const handleLogout= async()=>{
     try{
-      const res = await axios.post('http://localhost:7777/logout',{}, {withCredentials: true});
+      const res = await axios.post(import.meta.env.VITE_BASE_URL+'/logout',{}, {withCredentials: true});
     
 
     }catch(err){

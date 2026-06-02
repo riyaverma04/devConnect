@@ -17,7 +17,7 @@ const ChatList = () => {
     const fetchChatList=async()=>{
         
         try{
-            const chatList = await axios(`http://localhost:7777/message-list/${authorizedUser._id}`,{withCredentials: true});
+            const chatList = await axios.get(`${import.meta.env.VITE_BASE_URL}/message-list/${authorizedUser._id}`,{withCredentials: true});
             // console.log(chatList.data.chats);
             setChatProfile(chatList.data.chats)
 

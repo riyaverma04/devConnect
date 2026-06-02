@@ -26,7 +26,7 @@ const Chat = () => {
 
     const fetchuserWhomMessaging = async()=>{
         try{
-            const user = await axios.get(`http://localhost:7777/profile/${userId}/view`,{withCredentials:true});
+            const user = await axios.get(`${import.meta.env.VITE_BASE_URL}/profile/${userId}/view`,{withCredentials:true});
             console.log(user.data?.userProfile);
             setOtherUserProfile(user.data?.userProfile);
 
@@ -41,7 +41,7 @@ const Chat = () => {
     try{
 
         const roomId = [authenticUser._id, userId].sort().join("_");
-        const messageArray = await axios.get(`http://localhost:7777/messages/${roomId}`,{withCredentials:true});
+        const messageArray = await axios.get(`${import.meta.env.VITE_BASE_URL}/messages/${roomId}`,{withCredentials:true});
         console.log(messageArray.data?.messagesFromRoomId);
         // dispatch(addMessagesFromRoom(messageArray.data?.messagesFromRoomId));
         setMessages(messageArray.data?.messagesFromRoomId)

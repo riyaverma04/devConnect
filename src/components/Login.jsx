@@ -25,8 +25,8 @@ const handleChange = (e)=>{
     try{
       console.log(loginData)
         const endpoint = isLogIn
-        ? "http://localhost:7777/login"
-        : "http://localhost:7777/signup";
+        ? import.meta.env.VITE_BASE_URL+"/login"
+        : import.meta.env.VITE_BASE_URL+"/signup";
       const res = await axios.post(endpoint, loginData,{withCredentials: true});
       console.log(res)
       dispatch(setUser(res?.data?.user))
