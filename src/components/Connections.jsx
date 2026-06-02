@@ -6,7 +6,7 @@ import UserListItem from './UserListItem';
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
 import { addOtherUser } from '../utils/otherUserSlice';
-import Loading from './loading';
+import Loading from './Loading';
 
 
 

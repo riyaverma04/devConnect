@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import Loading from "./loading";
+import Loading from "./Loading";
 import axios from "axios";
 import { setUser } from "../utils/userSlice";
 import { addOtherUser } from "../utils/otherUserSlice";
