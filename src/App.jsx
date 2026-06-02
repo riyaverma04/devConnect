@@ -22,6 +22,41 @@ import UploadPost from './components/pages/UploadPost'
 import PostList from './components/pages/PostList'
 
 function App() {
+  const [posts, setPosts] = useState([]);
+  //getting the post 
+    const handleToggleLikes = async (postId,profileId) => {
+      console.log("toggleLike", postId);
+    
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post._id === postId) {
+          const alreadyLiked = post.likes.includes(userProfile._id);
+  
+          return {
+            ...post,
+            likes: alreadyLiked
+              ? post.likes.filter((id) => id !== userProfile._id)
+              : [...post.likes, userProfile._id],
+          };
+        }
+  
+        return post;
+      })
+    );
+  
+    // backend api call
+    try {
+      const res = await axios.patch(
+        `${import.meta.env.VITE_BASE_URL}/${postId}/toggle-like/${userProfile._id}`,
+        {},
+        { withCredentials: true }
+      );
+  
+      console.log(res.data?.message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
 
   return(
@@ -40,7 +75,7 @@ function App() {
         <Route path='/connections' element={<Connections />} />
         <Route path='/requests' element={<RequestRecieved />} />
         <Route path='/upload' element={<UploadPost />} />
-        <Route path='/posts/:userId' element={<PostList />} />
+        <Route path='/posts/:userId' element={<PostList  handleToggleLikes={handleToggleLikes}/>} />
         
         </Route>
        
